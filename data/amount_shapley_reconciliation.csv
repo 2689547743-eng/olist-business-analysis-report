@@ -1,0 +1,9 @@
+﻿year,component,contribution_cents,contribution_brl,total_merchandise_change_cents,method
+2017,购买客户数,-5597951,-55979.51,-6741488,Shapley average across all 24 factor-change orders
+2017,每位购买客户订单数,-3470,-34.7,-6741488,Shapley average across all 24 factor-change orders
+2017,每单商品明细件数,-659628,-6596.28,-6741488,Shapley average across all 24 factor-change orders
+2017,每件平均价格,-480439,-4804.39,-6741488,Shapley average across all 24 factor-change orders
+2018,购买客户数,-9078279,-90782.79,-12146683,Shapley average across all 24 factor-change orders
+2018,每位购买客户订单数,-190774,-1907.74,-12146683,Shapley average across all 24 factor-change orders
+2018,每单商品明细件数,-622809,-6228.09,-12146683,Shapley average across all 24 factor-change orders
+2018,每件平均价格,-2254821,-22548.21,-12146683,Shapley average across all 24 factor-change orders
