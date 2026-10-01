@@ -8,4 +8,4 @@
 
 ## GitHub Pages 发布
 
-将本目录全部文件上传至公开仓库的 main 分支根目录。打开仓库 Settings → Pages，选择 Deploy from a branch、main、/(root)，保存后等待网站部署。请保留 html、data 的目录结构。
+GitHub pages 已发布。
