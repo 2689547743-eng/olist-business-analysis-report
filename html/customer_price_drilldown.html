@@ -4124,21 +4124,43 @@ maplibre-gl/dist/maplibre-gl.js:
 
 window.Plotly = Plotly;
 return Plotly;
-}));</script><style id="executive-answer-style">.executive-answer{padding:12px 0;border-top:1px solid var(--line)}.executive-answer h3{font-size:17px;line-height:1.45;margin:0 0 8px;color:var(--ink)}.executive-answer p{max-width:105ch;margin:7px 0;line-height:1.7}</style></head><body><a class="skip-link" href="#executive-brief">跳到分析正文</a><main class="dashboard-page">
+}));</script><style id="executive-answer-style">.executive-answer{padding:12px 0;border-top:1px solid var(--line)}.executive-answer h3{font-size:17px;line-height:1.45;margin:0 0 8px;color:var(--ink)}.executive-answer p{max-width:105ch;margin:7px 0;line-height:1.7}</style><style>/* Reference typography for the merged report header. */
+.dashboard-page>header{border-top:0;border-bottom:1px solid #929292;text-align:left;padding:16px 0 32px;margin:0 0 22px}
+.dashboard-page>header::before{display:none}
+.dashboard-page>header h1{max-width:none;margin:0 0 26px;font-size:clamp(28px,3.3vw,44px);font-weight:800;line-height:1.3;letter-spacing:0;text-wrap:wrap;color:#373732}
+.dashboard-page>header p{max-width:none;margin:0;padding:4px 0 4px 26px;border-left:4px solid #b4b4b4;color:#62625f;font-size:18px;font-style:italic;line-height:1.8}
+.dashboard-page>header p code{font-style:normal;font-size:.9em}
+@media(max-width:720px){.dashboard-page>header{padding:10px 0 24px}.dashboard-page>header h1{font-size:28px;margin-bottom:20px}.dashboard-page>header p{padding-left:16px;font-size:15px;border-left-width:3px}}
+</style></head><body><a class="skip-link" href="#executive-brief">跳到分析正文</a><main class="dashboard-page">
 <header><h1>2017 与 2018 年 5→6 月已送达订单商品金额为何下降？两年的变化结构有何异同？</h1>
-<p class="scope">业务问题：分别核算两年 5→6 月商品金额的算术变化，再查看客户、品类、商品及销售连续性结构。观察到的相关变化不等于经营因果，未验证的解释仅作为假设。</p>
-<p class="scope">口径：按 <code>order_purchase_timestamp</code> 归属购买月，只纳入最终状态 <code>delivered</code>；客户按月内 <code>customer_unique_id</code> 去重。商品金额为商品明细 <code>price</code> 之和，不含运费。金额汇总用整数分，件均价及其分解用巴西雷亚尔 R$/件。</p>
-<p class="muted">每月购买客户数由订单表一单一行去重；商品金额由明细表一条商品行一行计算，避免订单与商品多对多放大。</p>
+<p class="scope">比较两年 5→6 月的客户与商品变化，识别下降来源及经营核查重点。按购买月份统计已送达订单，商品金额不含运费；变化分解不代表因果结论。</p>
 </header><nav class="page-nav" aria-label="看板章节"><a href="#overview">四因素总览</a><a href="#customers">一、客户方向</a><a href="#product-analysis">二、商品方向</a><a href="#findings">三、结论与建议</a></nav>
 <section class="executive-brief" id="executive-brief" aria-labelledby="executive-brief-title"><h2 id="executive-brief-title">两年结论速览</h2>
-<article class="executive-answer"><h3>2018 年：购买人数减少，连续销售商品也下滑</h3>
-<p>2018 年 5→6 月商品金额减少 R$ 121,466.83（12.43%）。购买客户减少 632 人，是四因素算术分摊的最大项，占降额 74.74%；从商品视角看，两月均销售商品的下滑占净降额 53.61%。</p>
-<p>可能的原因包括重点地区触达或下单转化走弱，以及重点商品可售不足、曝光转化或成交组合变化。SP、RJ 的客户降幅与重点品类的金额缺口确定了优先核查方向；具体原因仍需对照访问、下单、可售、价格和促销记录验证。</p></article>
-<article class="executive-answer"><h3>与 2017 年：客户人数同样下降，商品缺口构成不同</h3>
-<p>两年都以购买客户数减少为最大算术分摊项，也有 5 个共同入榜品类持续下降。区别在于，2017 年单月销售商品相抵后的净缺口占净降额 94.95%；2018 年连续销售商品占 53.61%，单月组仍占 46.39%。因此，两年有共同的排查对象，但商品排查重点不同；同名品类下滑不能证明成因相同。</p></article>
-<article class="executive-answer"><h3>经营建议：先重点城市，再分组核查商品</h3>
-<p>将历史复盘用于后续经营计划前，先用近期可比数据确认优先级。城市上先在 São Paulo、Rio de Janeiro 小范围测试 6 月定向营销；商品上优先查看 watches_gifts、garden_tools、sports_leisure，分别核查单月销售商品的可售与替代情况、连续销售商品的件数与成交结构。确认供给缺口后补货，供给正常时再测试曝光或转化方案；用可比窗口或对照组评估增量毛利扣除营销及新增履约成本后的收益，再扩大投入。</p></article>
-<p class="executive-boundary">客户与商品是同一批交易的两种拆解，占比不能相加；以上原因是待验证的解释，单月无销售也不代表商品下架。</p>
+<article class="executive-answer"><h3>1. 2018 年 5→6 月下降，已观察到的来源</h3>
+<ul>
+<li><strong>总量：</strong>商品金额（不含运费）从 5 月 R$ 977,544.69 降至 6 月 R$ 856,077.86，<strong>净减少 R$ 121,466.83（−12.4%）</strong>。</li>
+<li><strong>最大算术来源：</strong>购买客户数从 6,693 人降至 6,061 人（减少 632 人）。四因素 Shapley 分摊中，人数变化贡献 −R$ 90,782.79，占当月净降额约 <strong>74.7%</strong>。</li>
+<li><strong>其余三个因素：</strong>购买频次、每单件数与件均价合计贡献 −R$ 30,684.04，占约 25.3%；它们也有影响，但合计小于客户人数项。各项分摊见<a href="#overview">四因素总览</a>。</li>
+</ul></article>
+<article class="executive-answer"><h3>2. 与 2017 年是否相同</h3>
+<ul>
+<li><strong>相同点：</strong>2017 年同期商品金额也下降（R$ 489,338.25 → R$ 421,923.37，净减少 R$ 67,414.88，−13.8%），购买客户数同样是最大算术来源（贡献 −R$ 55,979.51，占约 <strong>83.0%</strong>）。按日均金额比较、调整 31／30 天的天数差后，两年仍下降：2018 年 −9.5%，2017 年 −10.9%。</li>
+<li><strong>关键不同点：商品缺口的结构。</strong>
+<ul>
+<li><strong>2017 年：</strong>“仅 5 月有销售记录”商品带来 −R$ 328,774.34，“仅 6 月有销售记录”商品带来 +R$ 264,763.47，两组大幅相抵后净减少 R$ 64,010.87，占全站净降额约 <strong>95.0%</strong>；“两月均有销售记录”商品仅净减少 R$ 3,404.01（约 5.0%）。</li>
+<li><strong>2018 年：</strong>“两月均有销售记录”商品净减少 <strong>R$ 65,112.68</strong>，占全站净降额约 <strong>53.6%</strong>，超过单月组相抵后的净缺口（R$ 56,354.15，约 46.4%）。商品缺口已更多体现在两月均有销售记录的商品上。</li>
+</ul></li>
+<li><strong>结论：</strong>两年下降的表象相似，购买客户数都是最大算术来源；<strong>商品层面的变化构成不同</strong>。2017 年主要是单月销售组相抵后的缺口，2018 年则以两月均销售商品自身的金额下滑为主。这支持分别排查，尚不能证明两年的经营原因相同或不同。</li>
+</ul></article>
+<article class="executive-answer"><h3>3. 经营上应优先核查什么</h3>
+<ol>
+<li><strong>购买客户人数下滑：</strong>两年共同的最大算术来源（2018 年 74.7%／2017 年 83.0%），优先补齐访问、下单与送达数据，核查触达和购买转化。</li>
+<li><strong>两月均销售商品的金额下滑：</strong>2018 年占净降额超过一半，优先核对成交件数、可售情况及成交组合；单月组的可售与替代情况也需检查。</li>
+<li><strong>下降集中的地区与品类：</strong>客户人数方向优先关注 SP、RJ，尤其 São Paulo；商品金额方向优先查看 2018 年降额前三品类 watches_gifts、garden_tools、sports_leisure，再下钻具体商品 ID。</li>
+<li><strong>商品规格与售后／履约线索：</strong>用规格、评分和评论辅助筛选核查对象；评论仅提供方向性线索，不能据此得出因果结论。</li>
+</ol>
+<p>将历史复盘用于经营行动前，先用近期可比数据确认优先级；核查后再安排小范围营销或货品调整，并以可比窗口或对照组评估收益。</p></article>
+<p class="executive-boundary">口径：按购买月份归属，最终 delivered 订单，商品金额不含运费。客户与商品是同一批交易的两种拆解，占比不能相加；Shapley 贡献是算术分摊，不是经营因果。“仅某月有销售记录”不等于新品或下架，“两月均销售”也不代表每日连续销售。</p>
 <nav class="executive-links" aria-label="结论速览相关章节"><a href="#overview">四因素分摊</a><a href="#customers">客户变化</a><a href="#product-analysis">商品销售结构</a><a href="#findings">结论与下一步</a></nav></section>
 <section class="section section-overview" id="overview"><h2>总览：商品金额下降的四因素贡献</h2>
 <div class="amount-trend-block" id="amount-trend">
