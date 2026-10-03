@@ -1,0 +1,30 @@
+{
+  "tables": [
+    "mart_order_items",
+    "mart_orders"
+  ],
+  "built_at": "2026-10-03T14:45:28.811300+08:00",
+  "period": [
+    "2017-01",
+    "2018-08"
+  ],
+  "last_purchase": "2018-08-29 15:00:37",
+  "rows": 109880,
+  "orders": 96211,
+  "amount_cents": 1318102713,
+  "limitations": [
+    "2018-08 最后一笔已送达订单的购买时间为 8 月 29 日，未确认覆盖完整自然月。",
+    "2017-01 最早购买记录为 1 月 5 日，月初覆盖情况未确认。"
+  ],
+  "sql": "SELECT order_id, order_item_id, customer_unique_id, customer_state,\norder_purchase_timestamp, product_id, category_label, price_cents\nFROM mart_order_items\nWHERE order_status = 'delivered'\nAND order_purchase_timestamp >= '2017-01-01'\nAND order_purchase_timestamp < '2018-09-01'",
+  "snapshot_sha256": "5713a72db963511a5087fd47639b09998e230a2331900543ebe9869bbb0b9c3f",
+  "row_schema": [
+    "month_index",
+    "state_index",
+    "category_index",
+    "product_index",
+    "anonymous_order_index",
+    "anonymous_customer_index",
+    "price_cents"
+  ]
+}

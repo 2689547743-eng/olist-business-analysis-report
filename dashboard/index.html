@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="电商交易指标看板：月份、地区与品类筛选，金额和客户趋势，商品排名与明细。">
+  <title>电商核心数据看板</title>
+  <link rel="stylesheet" href="dashboard.css">
+  <script defer src="vendor/plotly.min.js"></script>
+  <script defer src="data.js"></script>
+  <script defer src="dashboard.js"></script>
+</head>
+<body>
+<main class="page">
+  <header class="page-header">
+    <div><h1>电商核心数据看板</h1><p class="caption">按购买月份统计已送达订单 · 商品金额不含运费 · 币种：巴西雷亚尔 R$</p></div>
+    <a class="button" href="../html/customer_price_drilldown.html" target="_blank" rel="noopener">查看 5→6 月分析报告 ↗</a>
+  </header>
+  <div id="loading" class="notice" role="status">正在加载数据与图表…</div>
+  <noscript><p class="notice">请启用 JavaScript 以查看交互看板。</p></noscript>
+  <section class="panel filters" aria-label="全局筛选">
+    <label>开始月份<select id="start" disabled></select></label>
+    <label>结束月份<select id="end" disabled></select></label>
+    <label>客户所在州<select id="state" disabled></select></label>
+    <label>商品品类<select id="category" disabled></select></label>
+  </section>
+  <p id="scope" class="caption" aria-live="polite"></p>
+  <p id="boundary" class="caption"></p>
+  <div id="empty" class="notice" hidden>当前筛选范围没有符合条件的商品记录，可调整月份、地区或品类。</div>
+  <section id="metrics" class="metrics" aria-label="核心指标"></section>
+  <section class="trend-grid" aria-label="月度趋势">
+    <article class="panel chart-panel"><h2>商品金额趋势</h2><div id="amount-chart" class="chart" role="img" aria-label="商品金额月度趋势"></div><p class="caption">悬停查看月度金额、环比和同比；边界月份的比较需结合覆盖情况解读。</p></article>
+    <article class="panel chart-panel"><div class="chart-header"><h2>客户与订单趋势</h2><label>趋势指标<select id="volume"><option>购买客户数</option><option>订单数</option></select></label></div><div id="volume-chart" class="chart volume-chart" role="img" aria-label="客户或订单月度趋势"></div><p class="caption">客户按月去重；各月客户数相加不等于整个区间的去重客户数。</p></article>
+  </section>
+  <section aria-labelledby="ranking-title">
+    <div class="section-header"><div><h2 id="ranking-title">地区与品类排名</h2><p id="ranking-caption" class="caption"></p></div><label>排名依据<select id="rank-mode"><option>商品金额</option><option>下降金额</option></select></label></div>
+    <div class="ranking-grid"><article class="panel chart-panel"><h2>客户所在州 · Top 10</h2><div id="state-empty" class="notice" hidden></div><div id="state-chart" class="chart ranking-chart" role="img" aria-label="地区排名"></div></article><article class="panel chart-panel"><h2>商品品类 · Top 10</h2><div id="category-empty" class="notice" hidden></div><div id="category-chart" class="chart ranking-chart" role="img" aria-label="品类排名"></div></article></div>
+  </section>
+  <section class="panel products" aria-labelledby="products-title">
+    <h2 id="products-title">商品明细</h2>
+    <div class="table-controls"><label>搜索商品 ID 或品类<input id="search" type="search" placeholder="输入商品 ID 或品类关键词"></label><label>排序<select id="sort"><option>商品金额：从高到低</option><option>商品件数：从高到低</option><option>件均价：从高到低</option><option>商品金额：从低到高</option></select></label></div>
+    <p id="table-caption" class="caption" aria-live="polite"></p>
+    <div class="table-scroll" tabindex="0" aria-label="商品明细表，可水平滚动"><table><thead><tr><th>商品 ID</th><th>品类</th><th class="number">商品金额</th><th class="number">商品件数</th><th class="number">订单数</th><th class="number">件均价</th><th class="number">销售月份数</th></tr></thead><tbody id="product-rows"></tbody></table></div>
+    <div class="table-footer"><button id="export-products" type="button">导出当前商品明细 CSV</button><div class="pagination"><button id="prev-page" type="button" aria-label="上一页">‹</button><span id="page-label" class="caption"></span><button id="next-page" type="button" aria-label="下一页">›</button></div></div>
+  </section>
+  <details class="panel methods"><summary>指标口径与数据来源</summary><div class="methods-content">
+    <p>按购买时间归属月份，只纳入最终状态为 delivered 的订单。金额为选中商品的 price 之和，不含运费。客户与订单在当前范围内重新去重。筛选品类后，订单均商品金额为选中品类金额除以含该品类商品的订单数，不能解读为整单总额。州按订单记录的客户地址归属；跨州购买客户可能同时出现在多个州。</p>
+    <p>前期比较使用前一个等长的连续月份区间，沿用当前地区和品类筛选。同比比较去年同月，环比比较上月；比较期不可用或分母为零时不展示变化率。变化只描述观察结果，不代表因果。</p>
+    <p id="precise-amount"></p><p id="source-caption" class="caption"></p><pre id="source-sql"></pre>
+    <button id="export-monthly" type="button">导出筛选范围月度指标 CSV</button>
+  </div></details>
+  <footer class="caption footer">历史数据快照 · <a href="../index.html">项目首页</a></footer>
+</main>
+</body></html>
